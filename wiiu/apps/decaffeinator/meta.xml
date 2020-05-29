@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<app version="1">
+  <name>vWii Decaffeinator</name>
+  <coder>GaryOderNichts</coder>
+  <version>v1</version>
+  <release_date>20200529210000</release_date>
+  <short_description>Restore your vWii</short_description> 
+  <long_description>
+    vWii Decaffeinator allows you to restore your vWii without the need of a NAND Backup
+    Please backup your SLCCMPT and OTP before using this tool!
+
+    This uses the fact that the Wii U will redownload many missing files when performing a System Update.
+    So this homebrew will remove Files that can be redownloaded and forces a System Update.
+    This even works while being on the latest Firmware Version!
+  </long_description> 
+  <url>https://github.com/GaryOderNichts/vWii-Decaffeinator</url>
+  <category>tool</category>
+</app>

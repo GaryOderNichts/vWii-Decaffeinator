@@ -1,0 +1,4 @@
+*.rpx
+*.elf
+/build
+/.vscode
