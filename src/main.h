@@ -25,11 +25,11 @@ typedef enum
     REGION_UNSUPPORTED = 3
 } Region;
 
+extern int SYSLaunchSettings(void* arg1);
+
 static const char* const regionStrings[] = { "Japan", "USA", "Europe", "Unsupported" };
 
 void console_print_pos(int x, int y, const char* format, ...);
-
-int MenuMain(void);
 
 void setCanExit(BOOL canExit);
 

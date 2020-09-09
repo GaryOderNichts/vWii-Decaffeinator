@@ -5,7 +5,7 @@
 #include "title_strings.h"
 #include "main.h"
 
-int getMenuSize()
+int getMenuSize(void)
 {
     return sizeof(mainMenuOptions) / 4;
 }
@@ -36,7 +36,7 @@ void drawMenu(int selected, Region region)
         else 
             console_print_pos(0, ++drawIndex, "    %s", mainMenuOptions[i]);
 
-        if (i == 2 || i == 3)
+        if (i == 3 || i == 4)
             drawIndex++;
         
         menuIndex++;
@@ -46,7 +46,7 @@ void drawMenu(int selected, Region region)
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
 
-void drawWarning()
+void drawWarning(void)
 {
     OSScreenClearBufferEx(SCREEN_TV, 0xb30505FF);
     OSScreenClearBufferEx(SCREEN_DRC, 0xb30505FF);
@@ -60,7 +60,7 @@ void drawWarning()
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
 
-void drawCleanConfirm()
+void drawCleanConfirm(void)
 {
     OSScreenClearBufferEx(SCREEN_TV, 0);
     OSScreenClearBufferEx(SCREEN_DRC, 0);
@@ -73,7 +73,7 @@ void drawCleanConfirm()
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
 
-void drawForceUpdateConfirm()
+void drawForceUpdateConfirm(void)
 {
     OSScreenClearBufferEx(SCREEN_TV, 0);
     OSScreenClearBufferEx(SCREEN_DRC, 0);
@@ -86,7 +86,20 @@ void drawForceUpdateConfirm()
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
 
-void drawUpdateInfo()
+void drawSettingConfirm(void)
+{
+    OSScreenClearBufferEx(SCREEN_TV, 0);
+    OSScreenClearBufferEx(SCREEN_DRC, 0);
+
+    console_print_pos(0, 0, "Regenerate setting.txt");
+    console_print_pos(0, 1, "This will regenerate the setting.txt file");
+    console_print_pos(0, 3, "Press START to begin, any other button to cancel");
+
+    OSScreenFlipBuffersEx(SCREEN_TV);
+    OSScreenFlipBuffersEx(SCREEN_DRC);
+}
+
+void drawUpdateInfo(void)
 {
     OSScreenClearBufferEx(SCREEN_TV, 0);
     OSScreenClearBufferEx(SCREEN_DRC, 0);
@@ -99,7 +112,7 @@ void drawUpdateInfo()
     OSScreenFlipBuffersEx(SCREEN_DRC);
 }
 
-int getAdvancedSize()
+int getAdvancedSize(void)
 {
     return sizeof(advancedOptions) / 4;
 }

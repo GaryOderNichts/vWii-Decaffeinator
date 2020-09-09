@@ -65,7 +65,7 @@ BOOL customClean(BOOL* advancedEnabled, int size, Region region)
 
             if (advancedOptionsIds[i] == 0)
             {
-                if (region > 2)
+                if (region == REGION_UNSUPPORTED)
                     continue;
 
                 char* id = malloc(8 + 1);

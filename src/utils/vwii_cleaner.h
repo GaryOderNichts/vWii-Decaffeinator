@@ -20,9 +20,9 @@ static const char* const cleanBlackList[] =
     "dev:/title/00000001/00000002/data/setting.txt"
 };
 
-BOOL softClean();
-BOOL agressiveClean();
+BOOL softClean(void);
+BOOL agressiveClean(void);
 BOOL customClean(BOOL* advancedEnabled, int size, Region region);
-void forceUpdate();
+void forceUpdate(void);
 
 #endif

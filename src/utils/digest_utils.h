@@ -21,6 +21,6 @@ static const unsigned char digest_bin[] =
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-BOOL writeDigest();
+BOOL writeDigest(void);
 
 #endif

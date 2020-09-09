@@ -13,6 +13,7 @@ static const char* const mainMenuOptions[] =
     "Light mode",
     "Agressive mode",
     "Force Update",
+    "Regenerate setting.txt",
     "Advanced options",
     "Exit"
 };

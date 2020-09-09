@@ -1,7 +1,7 @@
 #include "digest_utils.h"
 #include <stdio.h>
 
-BOOL writeDigest()
+BOOL writeDigest(void)
 {
     FILE* digestFile = fopen(DIGEST_PATH, "wb");
     if (digestFile)

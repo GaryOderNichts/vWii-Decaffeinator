@@ -1,4 +1,5 @@
 *.rpx
 *.elf
+*.zip
 /build
 /.vscode

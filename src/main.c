@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
+#include <malloc.h>
 
 #include <whb/log.h>
 #include <whb/log_console.h>
@@ -26,6 +27,7 @@
 
 #include "utils/digest_utils.h"
 #include "utils/vwii_cleaner.h"
+#include "utils/setting_generator.h"
 #include "menu/menu.h"
 
 static BOOL canExit = TRUE;
@@ -124,7 +126,7 @@ void closeIOSUHAX(int fsaFd)
         IOSUHAX_Close();
 }
 
-int MenuMain(void)
+int main()
 {
     BOOL fromHBL = AppFromHBL();
  
@@ -139,18 +141,41 @@ int MenuMain(void)
     WHBLogConsoleInit();
     WHBLogConsoleSetColor(0);
 
-    Region region = REGION_UNSUPPORTED;
+    int fsaFd = -1;
+    BOOL launchSettings = FALSE;
 
-    // detect region up here bc it does not like being detected after iosuhax
-	if (SYSCheckTitleExists(MII_MAKER_EUR_TITLE_ID))
+    MCPSysProdSettings* psettings = memalign(64, sizeof(MCPSysProdSettings)); // the settings need to be aligned to 64 for some reason
+    int handle = MCP_Open();
+    if (handle < 0)
+    {
+        WHBLogPrintf("Cannot open MCP");
+        WHBLogConsoleDraw();
+        OSSleepTicks(OSMillisecondsToTicks(5000));
+		goto exit;
+    }
+    else
+    {
+        if (MCP_GetSysProdSettings(handle, psettings) < 0)
+        {
+            WHBLogPrintf("Error getting MCPSysProd");
+            WHBLogConsoleDraw();
+            OSSleepTicks(OSMillisecondsToTicks(5000));
+		    goto exit;
+        } 
+
+        MCP_Close(handle);
+    }
+    MCPSysProdSettings settings = *psettings;
+    free(psettings);
+
+    Region region = REGION_UNSUPPORTED;
+	if (settings.product_area == MCP_REGION_EUROPE)
         region = REGION_EUROPE;
-	else if (SYSCheckTitleExists(MII_MAKER_USA_TITLE_ID))
+	else if (settings.product_area == MCP_REGION_USA)
 		region = REGION_USA;
-	else if (SYSCheckTitleExists(MII_MAKER_JPN_TITLE_ID))
+	else if (settings.product_area == MCP_REGION_JAPAN)
 		region = REGION_JAPAN;
 
-    BOOL launchSettings = FALSE;
-    int fsaFd = -1;
 	int res = IOSUHAX_Open(NULL);
 	if (res < 0)
 		res = MCPHookOpen();
@@ -271,7 +296,7 @@ int MenuMain(void)
                         {                
                             if (softClean())
                             {
-                                forceUpdate(fsaFd);
+                                forceUpdate();
                                 OSSleepTicks(OSMillisecondsToTicks(2500));
                                 drawUpdateInfo();
                                 while (1)
@@ -337,7 +362,7 @@ int MenuMain(void)
 
                         if (vpad.trigger & VPAD_BUTTON_PLUS)
                         {                
-                            forceUpdate(fsaFd);
+                            forceUpdate();
                             OSSleepTicks(OSMillisecondsToTicks(2500));
                             drawUpdateInfo();
                             while (1)
@@ -359,8 +384,38 @@ int MenuMain(void)
                             break;
                     }
                     break;
-
+                
                 case 3:
+                    drawSettingConfirm();
+                    while (1)
+                    {
+                        VPADRead(VPAD_CHAN_0, &vpad, 1, NULL);
+
+                        if (vpad.trigger & VPAD_BUTTON_PLUS)
+                        {                
+                            if (!regenerateSettingFile(fsaFd, settings, region))
+                            {
+                                WHBLogPrintf("Regeneration failed!");
+                                WHBLogConsoleDraw();
+                                // display the log longer when we errored
+                                OSSleepTicks(OSMillisecondsToTicks(2500));
+                            }
+                            else
+                            {
+                                WHBLogPrintf("setting.txt successfully regenerated!");
+                                WHBLogConsoleDraw();
+                            }
+                            
+                            OSSleepTicks(OSMillisecondsToTicks(2500));
+                            break;
+                        }
+
+                        if (vpad.trigger != 0)
+                            break;
+                    }
+                    break;
+
+                case 4:
                     advancedMenu = TRUE;
                     memset(advancedEnabled, 0, getAdvancedSize() * sizeof(BOOL));
                     drawAdvancedMenu(0, advancedEnabled);
@@ -368,7 +423,7 @@ int MenuMain(void)
                     menuItemsAmount = getAdvancedSize();
                     break;
 
-                case 4:
+                case 5:
                     goto exit;
                     break;
                 }

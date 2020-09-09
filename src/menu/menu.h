@@ -7,15 +7,16 @@
 
 #define ADV_PER_PAGE_DRC 14
 
-int getMenuSize();
+int getMenuSize(void);
 void drawMenu(int selected, Region region);
 
-void drawWarning();
-void drawCleanConfirm();
-void drawForceUpdateConfirm();
-void drawUpdateInfo();
+void drawWarning(void);
+void drawCleanConfirm(void);
+void drawForceUpdateConfirm(void);
+void drawSettingConfirm(void);
+void drawUpdateInfo(void);
 
-int getAdvancedSize();
+int getAdvancedSize(void);
 void drawAdvancedMenu(int index, BOOL* enabled);
 
 #endif
