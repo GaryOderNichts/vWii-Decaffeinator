@@ -26,6 +26,11 @@ Save Data, Installed Channels, ...
 This will force an update which may redownload any missing files
 <br>
 
+<b>Regenerate setting.txt</b>  
+This will regenerate the setting.txt which is the only file that can't be recovered by any of the other modes.  
+The file will be regenerated from the consoles region and serial which can be read from the Wii U mode.
+<br>
+
 <b>Advanced options</b>  
 This lets you manually configure what should be redownloaded
 
