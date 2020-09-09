@@ -4,7 +4,7 @@
 static const char* const mainMenuHeader[] =
 {
     "+---------------------------------------+",
-    "|vWii Decaffeinator v1 by GaryOderNichts|",
+    "|vWii Decaffeinator v2 by GaryOderNichts|",
     "+---------------------------------------+"
 };
 
