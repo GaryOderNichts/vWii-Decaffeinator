@@ -38,6 +38,8 @@ This lets you manually configure what should be redownloaded
 * <b>Error 105-3102 when trying to update</b>  
     Restart your console and go back into System Settings  
     Now do the update again
+* <b>Error 160-0101 on startup</b>  
+    Remove any inserted disc and remove any connected harddrives
 
 ## Credits
 * Wii U Helpers from the [Nintendo Homebrew Server](https://discord.gg/C29hYvh) for helping me with the Project
