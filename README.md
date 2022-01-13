@@ -45,6 +45,11 @@ This lets you manually configure what should be redownloaded
     You'll get that error if you have a wii disc inserted while having a vWii NAND with missing system files.  
     Remove any inserted Wii discs and power on the console to do a system update.
 
+* <b>Updating with Tiramisu</b>  
+    After running the decaffeinator, follow the ["Undo Autobooting into PayloadLoader" steps here](https://wiiu.hacks.guide/#/uninstall-payloadloader?id=undo-autobooting-into-payloadloader).  
+    Then restart your console and perform the update.  
+    After the update is complete, you can follow [this guide to re-enable autobooting](https://wiiu.hacks.guide/#/tiramisu/autobooting).
+
 ## Credits
 * Wii U Helpers from the [Nintendo Homebrew Server](https://discord.gg/C29hYvh) for helping me with the Project
 * All people who contributed to [wut](https://github.com/devkitPro/wut) and [libiosuhax](https://github.com/wiiu-env/libiosuhax)
