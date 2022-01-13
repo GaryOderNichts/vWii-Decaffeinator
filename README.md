@@ -41,6 +41,10 @@ This lets you manually configure what should be redownloaded
 * <b>Error 160-0101 on startup</b>  
     Remove any inserted disc and remove any connected harddrives
 
+* <b>Error 160-0101 when powering on the console</b>  
+    You'll get that error if you have a wii disc inserted while having a vWii NAND with missing system files.  
+    Remove any inserted Wii discs and power on the console to do a system update.
+
 ## Credits
 * Wii U Helpers from the [Nintendo Homebrew Server](https://discord.gg/C29hYvh) for helping me with the Project
 * All people who contributed to [wut](https://github.com/devkitPro/wut) and [libiosuhax](https://github.com/wiiu-env/libiosuhax)
