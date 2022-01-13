@@ -38,8 +38,6 @@ This lets you manually configure what should be redownloaded
 * <b>Error 105-3102 when trying to update</b>  
     Restart your console and go back into System Settings  
     Now do the update again
-* <b>Error 160-0101 on startup</b>  
-    Remove any inserted disc and remove any connected harddrives
 
 * <b>Error 160-0101 when powering on the console</b>  
     You'll get that error if you have a wii disc inserted while having a vWii NAND with missing system files.  
